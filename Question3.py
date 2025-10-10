@@ -1,18 +1,29 @@
+def dfs_medical_system(symptom_tree, current_symptom, diagnosis_path):
+    if current_symptom in symptom_tree:
+        for disease, symptoms in symptom_tree[current_symptom].items():
 
-m1 = float(input("Enter marks of subject 1: "))
-m2 = float(input("Enter marks of subject 2: "))
-m3 = float(input("Enter marks of subject 3: "))
+            # Record diagnosis
+            diagnosis_path.append(disease)
+            for symptom in symptoms:
+                dfs_medical_system(symptom_tree, symptom, diagnosis_path)
+    return diagnosis_path
 
-average = (m1 + m2 + m3) / 3
+symptom_tree = {
+    'bukhar': {
+        'Flu': ['Cough', 'Chills'],
+        'Malaria': ['Chills', 'Fatigue'],
+    },
+    'khansi': {
+        'Flu': [],
+        'Cold': ['Sore Throat'],
+    },
+    'Chills': {
+        'Flu': [],
+        'Malaria': [],
+    },
+}
 
-if average >= 85:
-    grade = "A"
-elif average >= 70:
-    grade = "B"
-elif average >= 50:
-    grade = "C"
-else:
-    grade = "Fail"
-
-print(f"\nAverage Marks = {average:.2f}")
-print(f"Grade = {grade}")
+current_symptom = 'Fever'
+diagnosis_path = []
+diagnoses = dfs_medical_system(symptom_tree, current_symptom, diagnosis_path)
+print("Possible diagnoses:", set(diagnoses))
