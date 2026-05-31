@@ -26,7 +26,7 @@ def bfs_social_network(graph, start, target):
 
 
 social_graph = {
-    'Sunil': ['ali', 'hamza'],
+    'sunil': ['ali', 'hamza'],
     'ali': ['sunil', 'haider'],
     'hamza': ['sunil', 'mohsin'],
     'haider': ['ali', 'mohsin'],
@@ -35,4 +35,3 @@ social_graph = {
 start_user = 'sunil'
 target_user = 'haider'
 print(bfs_social_network(social_graph, start_user, target_user))
-
